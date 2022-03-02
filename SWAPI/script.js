@@ -1,33 +1,33 @@
-// personagem aleatorio
+// search for a random character
 
-$("#buscaPersonagensAleatorios").click(buscarPersonagemAleatorio);
+$("#searchRandomCharacter").click(searchRandomCharacter);
 
-function buscarPersonagemAleatorio(){
+function searchRandomCharacter(){
     $.get("http://swapi.dev/api/people/" + Math.floor(Math.random(1, 83)* 10),
-     preencherLabelPersonagemAleatorio);
+     fillLabelRandomCharacter);
 }
 
-function preencherLabelPersonagemAleatorio(data){
-    $("#personagemAleatorio").text(data.name);
+function fillLabelRandomCharacter(data){
+    $("#randomCharacter").text(data.name);
 }
 
-// pesquisa por nome de personagem
+// search for character's name
 
-$("#buscaFilme").click(buscarFilmeDoPersonagem);
+$("#searchMovie").click(searchCharacterMovie);
 
-function buscarFilmeDoPersonagem(){
-    var nome = $("#nomePersonagem").val();
-    $.get("https://swapi.dev/api/people/?search=" + nome, populaTabela);
+function searchCharacterMovie(){
+    var name = $("#characterName").val();
+    $.get("https://swapi.dev/api/people/?search=" + name, fillTable);
 }
 
-function populaTabela(data){
-    var resultado = data.results[0];
-    $("#nomeDoPersonagemLabel").text(resultado.name);
-    for (i = 0; i < resultado.films.length; i++){
-        $.get(resultado.films[i], criaLinha);
+function fillTable(data){
+    var result = data.results[0];
+    $("#characterNameLabel").text(result.name);
+    for (i = 0; i < result.films.length; i++){
+        $.get(result.films[i], createLine);
     }
 }
 
-function criaLinha(data){
+function createLine(data){
     console.log(data.title)
 }
